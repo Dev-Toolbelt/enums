@@ -20,11 +20,11 @@ final class GenderTest extends TestCase
 
     public function testFullNameReturnsCorrectNames(): void
     {
-        $this->assertEquals('Male', Gender::MALE->fullName());
-        $this->assertEquals('Female', Gender::FEMALE->fullName());
-        $this->assertEquals('Non-binary', Gender::NON_BINARY->fullName());
-        $this->assertEquals('Other', Gender::OTHER->fullName());
-        $this->assertEquals('Prefer not to say', Gender::PREFER_NOT_TO_SAY->fullName());
+        $this->assertEquals('Male', Gender::MALE->label());
+        $this->assertEquals('Female', Gender::FEMALE->label());
+        $this->assertEquals('Non-binary', Gender::NON_BINARY->label());
+        $this->assertEquals('Other', Gender::OTHER->label());
+        $this->assertEquals('Prefer not to say', Gender::PREFER_NOT_TO_SAY->label());
     }
 
     public function testFullNamePtBrReturnsCorrectNames(): void
@@ -94,6 +94,17 @@ final class GenderTest extends TestCase
     public function testToArrayReturnsAllGenders(): void
     {
         $array = Gender::toArray();
+
+        $this->assertCount(5, $array);
+        $this->assertArrayHasKey('M', $array);
+        $this->assertEquals('M', $array['M']);
+        $this->assertArrayHasKey('F', $array);
+        $this->assertEquals('F', $array['F']);
+    }
+
+    public function testToArrayWithLabelsReturnsAllGendersWithLabels(): void
+    {
+        $array = Gender::toArrayWithLabels();
 
         $this->assertCount(5, $array);
         $this->assertArrayHasKey('M', $array);

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace DevToolbelt\Enums\Brazil;
 
-enum BrazilianState: string
+use DevToolbelt\Enums\EnumInterface;
+
+enum BrazilianState: string implements EnumInterface
 {
     case AC = 'AC';
     case AL = 'AL';
@@ -34,7 +36,7 @@ enum BrazilianState: string
     case SE = 'SE';
     case TO = 'TO';
 
-    public function fullName(bool $toUppercase = false): string
+    public function label(bool $toUppercase = false): string
     {
         $name = match ($this) {
             self::AC => 'Acre',
@@ -70,6 +72,14 @@ enum BrazilianState: string
     }
 
     /**
+     * @return string[]
+     */
+    public function labelList(): array
+    {
+        return array_map(fn (self $case) => $case->label(), self::cases());
+    }
+
+    /**
      * @return array<string, string>
      */
     public static function toArray(): array
@@ -86,12 +96,12 @@ enum BrazilianState: string
     /**
      * @return array<string, string>
      */
-    public static function toArrayWithFullNames(bool $toUppercase = false): array
+    public static function toArrayWithLabels(bool $toUppercase = false): array
     {
         $result = [];
 
         foreach (self::cases() as $state) {
-            $result[$state->value] = $state->fullName($toUppercase);
+            $result[$state->value] = $state->label($toUppercase);
         }
 
         return $result;

@@ -27,18 +27,18 @@ final class MonthTest extends TestCase
 
     public function testFullNameReturnsCorrectNames(): void
     {
-        $this->assertEquals('January', Month::JANUARY->fullName());
-        $this->assertEquals('February', Month::FEBRUARY->fullName());
-        $this->assertEquals('March', Month::MARCH->fullName());
-        $this->assertEquals('April', Month::APRIL->fullName());
-        $this->assertEquals('May', Month::MAY->fullName());
-        $this->assertEquals('June', Month::JUNE->fullName());
-        $this->assertEquals('July', Month::JULY->fullName());
-        $this->assertEquals('August', Month::AUGUST->fullName());
-        $this->assertEquals('September', Month::SEPTEMBER->fullName());
-        $this->assertEquals('October', Month::OCTOBER->fullName());
-        $this->assertEquals('November', Month::NOVEMBER->fullName());
-        $this->assertEquals('December', Month::DECEMBER->fullName());
+        $this->assertEquals('January', Month::JANUARY->label());
+        $this->assertEquals('February', Month::FEBRUARY->label());
+        $this->assertEquals('March', Month::MARCH->label());
+        $this->assertEquals('April', Month::APRIL->label());
+        $this->assertEquals('May', Month::MAY->label());
+        $this->assertEquals('June', Month::JUNE->label());
+        $this->assertEquals('July', Month::JULY->label());
+        $this->assertEquals('August', Month::AUGUST->label());
+        $this->assertEquals('September', Month::SEPTEMBER->label());
+        $this->assertEquals('October', Month::OCTOBER->label());
+        $this->assertEquals('November', Month::NOVEMBER->label());
+        $this->assertEquals('December', Month::DECEMBER->label());
     }
 
     public function testFullNamePtBrReturnsCorrectNames(): void
@@ -201,6 +201,15 @@ final class MonthTest extends TestCase
     public function testToArrayReturnsAllMonths(): void
     {
         $array = Month::toArray();
+
+        $this->assertCount(12, $array);
+        $this->assertEquals(1, $array[1]);
+        $this->assertEquals(12, $array[12]);
+    }
+
+    public function testToArrayWithLabelsReturnsAllMonthsWithLabels(): void
+    {
+        $array = Month::toArrayWithLabels();
 
         $this->assertCount(12, $array);
         $this->assertEquals('January', $array[1]);

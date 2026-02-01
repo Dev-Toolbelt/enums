@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace DevToolbelt\Enums\Calendar;
 
-enum DayOfWeek: int
+use DevToolbelt\Enums\EnumInterface;
+
+enum DayOfWeek: int implements EnumInterface
 {
     case SUNDAY = 0;
     case MONDAY = 1;
@@ -14,7 +16,7 @@ enum DayOfWeek: int
     case FRIDAY = 5;
     case SATURDAY = 6;
 
-    public function fullName(): string
+    public function label(): string
     {
         return match ($this) {
             self::SUNDAY => 'Sunday',
@@ -173,14 +175,36 @@ enum DayOfWeek: int
     }
 
     /**
-     * @return array<int, string>
+     * @return string[]
+     */
+    public function labelList(): array
+    {
+        return array_map(fn (self $case) => $case->label(), self::cases());
+    }
+
+    /**
+     * @return array<int, int>
      */
     public static function toArray(): array
     {
         $result = [];
 
         foreach (self::cases() as $day) {
-            $result[$day->value] = $day->fullName();
+            $result[$day->value] = $day->value;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    public static function toArrayWithLabels(): array
+    {
+        $result = [];
+
+        foreach (self::cases() as $day) {
+            $result[$day->value] = $day->label();
         }
 
         return $result;

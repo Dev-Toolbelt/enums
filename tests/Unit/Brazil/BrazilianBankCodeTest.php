@@ -23,12 +23,12 @@ final class BrazilianBankCodeTest extends TestCase
 
     public function testFullNameReturnsCorrectNames(): void
     {
-        $this->assertEquals('Banco do Brasil S.A.', BrazilianBankCode::BANCO_DO_BRASIL->fullName());
-        $this->assertEquals('Caixa Econômica Federal', BrazilianBankCode::CAIXA_ECONOMICA_FEDERAL->fullName());
-        $this->assertEquals('Banco Santander Brasil S.A.', BrazilianBankCode::SANTANDER->fullName());
-        $this->assertEquals('Banco Bradesco S.A.', BrazilianBankCode::BRADESCO->fullName());
-        $this->assertEquals('Itaú Unibanco S.A.', BrazilianBankCode::ITAU_UNIBANCO->fullName());
-        $this->assertEquals('Nu Pagamentos S.A. (Nubank)', BrazilianBankCode::NUBANK->fullName());
+        $this->assertEquals('Banco do Brasil S.A.', BrazilianBankCode::BANCO_DO_BRASIL->label());
+        $this->assertEquals('Caixa Econômica Federal', BrazilianBankCode::CAIXA_ECONOMICA_FEDERAL->label());
+        $this->assertEquals('Banco Santander Brasil S.A.', BrazilianBankCode::SANTANDER->label());
+        $this->assertEquals('Banco Bradesco S.A.', BrazilianBankCode::BRADESCO->label());
+        $this->assertEquals('Itaú Unibanco S.A.', BrazilianBankCode::ITAU_UNIBANCO->label());
+        $this->assertEquals('Nu Pagamentos S.A. (Nubank)', BrazilianBankCode::NUBANK->label());
     }
 
     public function testShortNameReturnsCorrectNames(): void
@@ -81,7 +81,7 @@ final class BrazilianBankCodeTest extends TestCase
 
     public function testToArrayWithFullNamesReturnsBankNames(): void
     {
-        $array = BrazilianBankCode::toArrayWithFullNames();
+        $array = BrazilianBankCode::toArrayWithLabels();
 
         $this->assertArrayHasKey('001', $array);
         $this->assertEquals('Banco do Brasil S.A.', $array['001']);

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace DevToolbelt\Enums\Locale;
 
-enum Language: string
+use DevToolbelt\Enums\EnumInterface;
+
+enum Language: string implements EnumInterface
 {
     // Arabic
     case AR = 'ar';
@@ -154,7 +156,7 @@ enum Language: string
     case VI = 'vi';
     case VI_VN = 'vi-VN';
 
-    public function fullName(): string
+    public function label(): string
     {
         return match ($this) {
             self::AR => 'Arabic',
@@ -328,6 +330,14 @@ enum Language: string
     }
 
     /**
+     * @return string[]
+     */
+    public function labelList(): array
+    {
+        return array_map(fn (self $case) => $case->label(), self::cases());
+    }
+
+    /**
      * @return array<string, string>
      */
     public static function toArray(): array
@@ -344,12 +354,12 @@ enum Language: string
     /**
      * @return array<string, string>
      */
-    public static function toArrayWithFullNames(): array
+    public static function toArrayWithLabels(): array
     {
         $result = [];
 
         foreach (self::cases() as $language) {
-            $result[$language->value] = $language->fullName();
+            $result[$language->value] = $language->label();
         }
 
         return $result;

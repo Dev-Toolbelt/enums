@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace DevToolbelt\Enums\Http;
 
-enum HttpMethod: string
+use DevToolbelt\Enums\EnumInterface;
+
+enum HttpMethod: string implements EnumInterface
 {
     case GET = 'GET';
     case POST = 'POST';
@@ -15,6 +17,21 @@ enum HttpMethod: string
     case OPTIONS = 'OPTIONS';
     case CONNECT = 'CONNECT';
     case TRACE = 'TRACE';
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::GET => 'GET - Retrieve a resource',
+            self::POST => 'POST - Create a new resource',
+            self::PUT => 'PUT - Update/Replace a resource',
+            self::PATCH => 'PATCH - Partial update a resource',
+            self::DELETE => 'DELETE - Remove a resource',
+            self::HEAD => 'HEAD - Retrieve headers only',
+            self::OPTIONS => 'OPTIONS - Describe communication options',
+            self::CONNECT => 'CONNECT - Establish a tunnel',
+            self::TRACE => 'TRACE - Perform a message loop-back test',
+        };
+    }
 
     public function isSafe(): bool
     {
@@ -32,6 +49,14 @@ enum HttpMethod: string
     }
 
     /**
+     * @return string[]
+     */
+    public function labelList(): array
+    {
+        return array_map(fn (self $case) => $case->label(), self::cases());
+    }
+
+    /**
      * @return array<string, string>
      */
     public static function toArray(): array
@@ -40,6 +65,20 @@ enum HttpMethod: string
 
         foreach (self::cases() as $method) {
             $result[$method->value] = $method->value;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function toArrayWithLabels(): array
+    {
+        $result = [];
+
+        foreach (self::cases() as $method) {
+            $result[$method->value] = $method->label();
         }
 
         return $result;

@@ -21,12 +21,12 @@ final class BrazilianDocumentTypeTest extends TestCase
 
     public function testFullNameReturnsCorrectNames(): void
     {
-        $this->assertEquals('Cadastro de Pessoa Física', BrazilianDocumentType::CPF->fullName());
-        $this->assertEquals('Cadastro Nacional da Pessoa Jurídica', BrazilianDocumentType::CNPJ->fullName());
-        $this->assertEquals('Registro Geral', BrazilianDocumentType::RG->fullName());
-        $this->assertEquals('Carteira Nacional de Habilitação', BrazilianDocumentType::CNH->fullName());
-        $this->assertEquals('Carteira de Trabalho e Previdência Social', BrazilianDocumentType::CTPS->fullName());
-        $this->assertEquals('Ordem dos Advogados do Brasil', BrazilianDocumentType::OAB->fullName());
+        $this->assertEquals('Cadastro de Pessoa Física', BrazilianDocumentType::CPF->label());
+        $this->assertEquals('Cadastro Nacional da Pessoa Jurídica', BrazilianDocumentType::CNPJ->label());
+        $this->assertEquals('Registro Geral', BrazilianDocumentType::RG->label());
+        $this->assertEquals('Carteira Nacional de Habilitação', BrazilianDocumentType::CNH->label());
+        $this->assertEquals('Carteira de Trabalho e Previdência Social', BrazilianDocumentType::CTPS->label());
+        $this->assertEquals('Ordem dos Advogados do Brasil', BrazilianDocumentType::OAB->label());
     }
 
     public function testMaskReturnsCorrectMasks(): void
@@ -129,7 +129,7 @@ final class BrazilianDocumentTypeTest extends TestCase
 
     public function testToArrayWithFullNamesReturnsDocumentNames(): void
     {
-        $array = BrazilianDocumentType::toArrayWithFullNames();
+        $array = BrazilianDocumentType::toArrayWithLabels();
 
         $this->assertArrayHasKey('CPF', $array);
         $this->assertEquals('Cadastro de Pessoa Física', $array['CPF']);

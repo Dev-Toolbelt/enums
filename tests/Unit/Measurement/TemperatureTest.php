@@ -20,11 +20,11 @@ final class TemperatureTest extends TestCase
 
     public function testFullNameReturnsCorrectNames(): void
     {
-        $this->assertEquals('Celsius', Temperature::CELSIUS->fullName());
-        $this->assertEquals('Fahrenheit', Temperature::FAHRENHEIT->fullName());
-        $this->assertEquals('Kelvin', Temperature::KELVIN->fullName());
-        $this->assertEquals('Rankine', Temperature::RANKINE->fullName());
-        $this->assertEquals('Réaumur', Temperature::REAUMUR->fullName());
+        $this->assertEquals('Celsius', Temperature::CELSIUS->label());
+        $this->assertEquals('Fahrenheit', Temperature::FAHRENHEIT->label());
+        $this->assertEquals('Kelvin', Temperature::KELVIN->label());
+        $this->assertEquals('Rankine', Temperature::RANKINE->label());
+        $this->assertEquals('Réaumur', Temperature::REAUMUR->label());
     }
 
     public function testFullNamePtBrReturnsCorrectNames(): void
@@ -159,6 +159,17 @@ final class TemperatureTest extends TestCase
     public function testToArrayReturnsAllTemperatures(): void
     {
         $array = Temperature::toArray();
+
+        $this->assertCount(5, $array);
+        $this->assertArrayHasKey('C', $array);
+        $this->assertEquals('C', $array['C']);
+        $this->assertArrayHasKey('F', $array);
+        $this->assertEquals('F', $array['F']);
+    }
+
+    public function testToArrayWithLabelsReturnsAllTemperaturesWithLabels(): void
+    {
+        $array = Temperature::toArrayWithLabels();
 
         $this->assertCount(5, $array);
         $this->assertArrayHasKey('C', $array);

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace DevToolbelt\Enums\Locale;
 
-enum Currency: string
+use DevToolbelt\Enums\EnumInterface;
+
+enum Currency: string implements EnumInterface
 {
     case AED = 'AED';
     case AFN = 'AFN';
@@ -163,7 +165,7 @@ enum Currency: string
     case ZMW = 'ZMW';
     case ZWL = 'ZWL';
 
-    public function fullName(): string
+    public function label(): string
     {
         return match ($this) {
             self::AED => 'United Arab Emirates Dirham',
@@ -499,6 +501,14 @@ enum Currency: string
     }
 
     /**
+     * @return string[]
+     */
+    public function labelList(): array
+    {
+        return array_map(fn (self $case) => $case->label(), self::cases());
+    }
+
+    /**
      * @return array<string, string>
      */
     public static function toArray(): array
@@ -515,12 +525,12 @@ enum Currency: string
     /**
      * @return array<string, string>
      */
-    public static function toArrayWithFullNames(): array
+    public static function toArrayWithLabels(): array
     {
         $result = [];
 
         foreach (self::cases() as $currency) {
-            $result[$currency->value] = $currency->fullName();
+            $result[$currency->value] = $currency->label();
         }
 
         return $result;

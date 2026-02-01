@@ -42,33 +42,33 @@ final class BrazilianStateTest extends TestCase
 
     public function testFullNameReturnsCorrectStateNames(): void
     {
-        $this->assertEquals('Acre', BrazilianState::AC->fullName());
-        $this->assertEquals('Alagoas', BrazilianState::AL->fullName());
-        $this->assertEquals('Amapá', BrazilianState::AP->fullName());
-        $this->assertEquals('Amazonas', BrazilianState::AM->fullName());
-        $this->assertEquals('Bahia', BrazilianState::BA->fullName());
-        $this->assertEquals('Ceará', BrazilianState::CE->fullName());
-        $this->assertEquals('Distrito Federal', BrazilianState::DF->fullName());
-        $this->assertEquals('Espírito Santo', BrazilianState::ES->fullName());
-        $this->assertEquals('Goiás', BrazilianState::GO->fullName());
-        $this->assertEquals('Maranhão', BrazilianState::MA->fullName());
-        $this->assertEquals('Mato Grosso', BrazilianState::MT->fullName());
-        $this->assertEquals('Mato Grosso do Sul', BrazilianState::MS->fullName());
-        $this->assertEquals('Minas Gerais', BrazilianState::MG->fullName());
-        $this->assertEquals('Pará', BrazilianState::PA->fullName());
-        $this->assertEquals('Paraíba', BrazilianState::PB->fullName());
-        $this->assertEquals('Paraná', BrazilianState::PR->fullName());
-        $this->assertEquals('Pernambuco', BrazilianState::PE->fullName());
-        $this->assertEquals('Piauí', BrazilianState::PI->fullName());
-        $this->assertEquals('Rio de Janeiro', BrazilianState::RJ->fullName());
-        $this->assertEquals('Rio Grande do Norte', BrazilianState::RN->fullName());
-        $this->assertEquals('Rio Grande do Sul', BrazilianState::RS->fullName());
-        $this->assertEquals('Rondônia', BrazilianState::RO->fullName());
-        $this->assertEquals('Roraima', BrazilianState::RR->fullName());
-        $this->assertEquals('Santa Catarina', BrazilianState::SC->fullName());
-        $this->assertEquals('São Paulo', BrazilianState::SP->fullName());
-        $this->assertEquals('Sergipe', BrazilianState::SE->fullName());
-        $this->assertEquals('Tocantins', BrazilianState::TO->fullName());
+        $this->assertEquals('Acre', BrazilianState::AC->label());
+        $this->assertEquals('Alagoas', BrazilianState::AL->label());
+        $this->assertEquals('Amapá', BrazilianState::AP->label());
+        $this->assertEquals('Amazonas', BrazilianState::AM->label());
+        $this->assertEquals('Bahia', BrazilianState::BA->label());
+        $this->assertEquals('Ceará', BrazilianState::CE->label());
+        $this->assertEquals('Distrito Federal', BrazilianState::DF->label());
+        $this->assertEquals('Espírito Santo', BrazilianState::ES->label());
+        $this->assertEquals('Goiás', BrazilianState::GO->label());
+        $this->assertEquals('Maranhão', BrazilianState::MA->label());
+        $this->assertEquals('Mato Grosso', BrazilianState::MT->label());
+        $this->assertEquals('Mato Grosso do Sul', BrazilianState::MS->label());
+        $this->assertEquals('Minas Gerais', BrazilianState::MG->label());
+        $this->assertEquals('Pará', BrazilianState::PA->label());
+        $this->assertEquals('Paraíba', BrazilianState::PB->label());
+        $this->assertEquals('Paraná', BrazilianState::PR->label());
+        $this->assertEquals('Pernambuco', BrazilianState::PE->label());
+        $this->assertEquals('Piauí', BrazilianState::PI->label());
+        $this->assertEquals('Rio de Janeiro', BrazilianState::RJ->label());
+        $this->assertEquals('Rio Grande do Norte', BrazilianState::RN->label());
+        $this->assertEquals('Rio Grande do Sul', BrazilianState::RS->label());
+        $this->assertEquals('Rondônia', BrazilianState::RO->label());
+        $this->assertEquals('Roraima', BrazilianState::RR->label());
+        $this->assertEquals('Santa Catarina', BrazilianState::SC->label());
+        $this->assertEquals('São Paulo', BrazilianState::SP->label());
+        $this->assertEquals('Sergipe', BrazilianState::SE->label());
+        $this->assertEquals('Tocantins', BrazilianState::TO->label());
     }
 
     public function testTotalNumberOfStates(): void
@@ -81,7 +81,7 @@ final class BrazilianStateTest extends TestCase
         $state = BrazilianState::from('CE');
 
         $this->assertEquals(BrazilianState::CE, $state);
-        $this->assertEquals('Ceará', $state->fullName());
+        $this->assertEquals('Ceará', $state->label());
     }
 
     public function testTryFromReturnsNullForInvalidState(): void
@@ -101,10 +101,10 @@ final class BrazilianStateTest extends TestCase
 
     public function testFullNameReturnsUppercaseWhenParameterIsTrue(): void
     {
-        $this->assertEquals('CEARÁ', BrazilianState::CE->fullName(true));
-        $this->assertEquals('SÃO PAULO', BrazilianState::SP->fullName(true));
-        $this->assertEquals('ESPÍRITO SANTO', BrazilianState::ES->fullName(true));
-        $this->assertEquals('MATO GROSSO DO SUL', BrazilianState::MS->fullName(true));
+        $this->assertEquals('CEARÁ', BrazilianState::CE->label(true));
+        $this->assertEquals('SÃO PAULO', BrazilianState::SP->label(true));
+        $this->assertEquals('ESPÍRITO SANTO', BrazilianState::ES->label(true));
+        $this->assertEquals('MATO GROSSO DO SUL', BrazilianState::MS->label(true));
     }
 
     public function testToArrayReturnsAllStatesWithUfAsKeyAndValue(): void
@@ -120,7 +120,7 @@ final class BrazilianStateTest extends TestCase
 
     public function testToArrayWithFullNamesReturnsUfAsKeyAndFullNameAsValue(): void
     {
-        $array = BrazilianState::toArrayWithFullNames();
+        $array = BrazilianState::toArrayWithLabels();
 
         $this->assertCount(27, $array);
         $this->assertArrayHasKey('CE', $array);
@@ -133,7 +133,7 @@ final class BrazilianStateTest extends TestCase
 
     public function testToArrayWithFullNamesReturnsUppercaseWhenParameterIsTrue(): void
     {
-        $array = BrazilianState::toArrayWithFullNames(true);
+        $array = BrazilianState::toArrayWithLabels(true);
 
         $this->assertCount(27, $array);
         $this->assertEquals('CEARÁ', $array['CE']);

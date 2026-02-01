@@ -21,12 +21,12 @@ final class LanguageTest extends TestCase
 
     public function testFullNameReturnsCorrectNames(): void
     {
-        $this->assertEquals('Portuguese (Brazil)', Language::PT_BR->fullName());
-        $this->assertEquals('English (United States)', Language::EN_US->fullName());
-        $this->assertEquals('Spanish (Spain)', Language::ES_ES->fullName());
-        $this->assertEquals('French (France)', Language::FR_FR->fullName());
-        $this->assertEquals('German (Germany)', Language::DE_DE->fullName());
-        $this->assertEquals('Japanese (Japan)', Language::JA_JP->fullName());
+        $this->assertEquals('Portuguese (Brazil)', Language::PT_BR->label());
+        $this->assertEquals('English (United States)', Language::EN_US->label());
+        $this->assertEquals('Spanish (Spain)', Language::ES_ES->label());
+        $this->assertEquals('French (France)', Language::FR_FR->label());
+        $this->assertEquals('German (Germany)', Language::DE_DE->label());
+        $this->assertEquals('Japanese (Japan)', Language::JA_JP->label());
     }
 
     public function testNativeNameReturnsCorrectNativeNames(): void
@@ -116,7 +116,7 @@ final class LanguageTest extends TestCase
 
     public function testToArrayWithFullNamesReturnsLanguageNames(): void
     {
-        $array = Language::toArrayWithFullNames();
+        $array = Language::toArrayWithLabels();
 
         $this->assertArrayHasKey('pt-BR', $array);
         $this->assertEquals('Portuguese (Brazil)', $array['pt-BR']);
@@ -150,17 +150,17 @@ final class LanguageTest extends TestCase
 
     public function testSpanishVariantsExist(): void
     {
-        $this->assertEquals('Spanish (Mexico)', Language::ES_MX->fullName());
-        $this->assertEquals('Spanish (Argentina)', Language::ES_AR->fullName());
-        $this->assertEquals('Spanish (Colombia)', Language::ES_CO->fullName());
-        $this->assertEquals('Spanish (Chile)', Language::ES_CL->fullName());
+        $this->assertEquals('Spanish (Mexico)', Language::ES_MX->label());
+        $this->assertEquals('Spanish (Argentina)', Language::ES_AR->label());
+        $this->assertEquals('Spanish (Colombia)', Language::ES_CO->label());
+        $this->assertEquals('Spanish (Chile)', Language::ES_CL->label());
     }
 
     public function testEnglishVariantsExist(): void
     {
-        $this->assertEquals('English (United Kingdom)', Language::EN_GB->fullName());
-        $this->assertEquals('English (Australia)', Language::EN_AU->fullName());
-        $this->assertEquals('English (Canada)', Language::EN_CA->fullName());
-        $this->assertEquals('English (India)', Language::EN_IN->fullName());
+        $this->assertEquals('English (United Kingdom)', Language::EN_GB->label());
+        $this->assertEquals('English (Australia)', Language::EN_AU->label());
+        $this->assertEquals('English (Canada)', Language::EN_CA->label());
+        $this->assertEquals('English (India)', Language::EN_IN->label());
     }
 }

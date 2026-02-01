@@ -22,13 +22,13 @@ final class DayOfWeekTest extends TestCase
 
     public function testFullNameReturnsCorrectNames(): void
     {
-        $this->assertEquals('Sunday', DayOfWeek::SUNDAY->fullName());
-        $this->assertEquals('Monday', DayOfWeek::MONDAY->fullName());
-        $this->assertEquals('Tuesday', DayOfWeek::TUESDAY->fullName());
-        $this->assertEquals('Wednesday', DayOfWeek::WEDNESDAY->fullName());
-        $this->assertEquals('Thursday', DayOfWeek::THURSDAY->fullName());
-        $this->assertEquals('Friday', DayOfWeek::FRIDAY->fullName());
-        $this->assertEquals('Saturday', DayOfWeek::SATURDAY->fullName());
+        $this->assertEquals('Sunday', DayOfWeek::SUNDAY->label());
+        $this->assertEquals('Monday', DayOfWeek::MONDAY->label());
+        $this->assertEquals('Tuesday', DayOfWeek::TUESDAY->label());
+        $this->assertEquals('Wednesday', DayOfWeek::WEDNESDAY->label());
+        $this->assertEquals('Thursday', DayOfWeek::THURSDAY->label());
+        $this->assertEquals('Friday', DayOfWeek::FRIDAY->label());
+        $this->assertEquals('Saturday', DayOfWeek::SATURDAY->label());
     }
 
     public function testFullNamePtBrReturnsCorrectNames(): void
@@ -171,6 +171,15 @@ final class DayOfWeekTest extends TestCase
     public function testToArrayReturnsAllDays(): void
     {
         $array = DayOfWeek::toArray();
+
+        $this->assertCount(7, $array);
+        $this->assertEquals(0, $array[0]);
+        $this->assertEquals(6, $array[6]);
+    }
+
+    public function testToArrayWithLabelsReturnsAllDaysWithLabels(): void
+    {
+        $array = DayOfWeek::toArrayWithLabels();
 
         $this->assertCount(7, $array);
         $this->assertEquals('Sunday', $array[0]);

@@ -22,12 +22,12 @@ final class ContactTypeTest extends TestCase
 
     public function testFullNameReturnsCorrectNames(): void
     {
-        $this->assertEquals('Email', ContactType::EMAIL->fullName());
-        $this->assertEquals('Phone', ContactType::PHONE->fullName());
-        $this->assertEquals('Mobile Phone', ContactType::MOBILE->fullName());
-        $this->assertEquals('WhatsApp', ContactType::WHATSAPP->fullName());
-        $this->assertEquals('LinkedIn', ContactType::LINKEDIN->fullName());
-        $this->assertEquals('Instagram', ContactType::INSTAGRAM->fullName());
+        $this->assertEquals('Email', ContactType::EMAIL->label());
+        $this->assertEquals('Phone', ContactType::PHONE->label());
+        $this->assertEquals('Mobile Phone', ContactType::MOBILE->label());
+        $this->assertEquals('WhatsApp', ContactType::WHATSAPP->label());
+        $this->assertEquals('LinkedIn', ContactType::LINKEDIN->label());
+        $this->assertEquals('Instagram', ContactType::INSTAGRAM->label());
     }
 
     public function testFullNamePtBrReturnsCorrectNames(): void
@@ -119,6 +119,16 @@ final class ContactTypeTest extends TestCase
     public function testToArrayReturnsAllContactTypes(): void
     {
         $array = ContactType::toArray();
+
+        $this->assertArrayHasKey('email', $array);
+        $this->assertEquals('email', $array['email']);
+        $this->assertArrayHasKey('whatsapp', $array);
+        $this->assertEquals('whatsapp', $array['whatsapp']);
+    }
+
+    public function testToArrayWithLabelsReturnsAllContactTypesWithLabels(): void
+    {
+        $array = ContactType::toArrayWithLabels();
 
         $this->assertArrayHasKey('email', $array);
         $this->assertEquals('Email', $array['email']);

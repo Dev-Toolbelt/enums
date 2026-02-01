@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace DevToolbelt\Enums\Brazil;
 
-enum BrazilianDocumentType: string
+use DevToolbelt\Enums\EnumInterface;
+
+enum BrazilianDocumentType: string implements EnumInterface
 {
     case CPF = 'CPF';
     case CNPJ = 'CNPJ';
@@ -30,7 +32,7 @@ enum BrazilianDocumentType: string
     case CRECI = 'CRECI';
     case CAU = 'CAU';
 
-    public function fullName(): string
+    public function label(): string
     {
         return match ($this) {
             self::CPF => 'Cadastro de Pessoa Física',
@@ -131,6 +133,14 @@ enum BrazilianDocumentType: string
     }
 
     /**
+     * @return string[]
+     */
+    public function labelList(): array
+    {
+        return array_map(fn (self $case) => $case->label(), self::cases());
+    }
+
+    /**
      * @return array<string, string>
      */
     public static function toArray(): array
@@ -147,12 +157,12 @@ enum BrazilianDocumentType: string
     /**
      * @return array<string, string>
      */
-    public static function toArrayWithFullNames(): array
+    public static function toArrayWithLabels(): array
     {
         $result = [];
 
         foreach (self::cases() as $document) {
-            $result[$document->value] = $document->fullName();
+            $result[$document->value] = $document->label();
         }
 
         return $result;

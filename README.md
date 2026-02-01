@@ -79,11 +79,11 @@ use DevToolbelt\Enums\Locale\Country;
 use DevToolbelt\Enums\Locale\Currency;
 
 $country = Country::BR;
-echo $country->fullName(); // "Brazil"
+echo $country->label(); // "Brazil"
 echo $country->alpha3();   // "BRA"
 
 $currency = Currency::BRL;
-echo $currency->fullName();     // "Brazilian Real"
+echo $currency->label();     // "Brazilian Real"
 echo $currency->symbol();       // "R$"
 echo $currency->decimalPlaces(); // 2
 ```
@@ -95,7 +95,7 @@ use DevToolbelt\Enums\Locale\Language;
 
 $lang = Language::PT_BR;
 
-echo $lang->fullName();    // "Portuguese (Brazil)"
+echo $lang->label();    // "Portuguese (Brazil)"
 echo $lang->nativeName();  // "Português"
 echo $lang->direction();   // "ltr"
 echo $lang->baseLanguage(); // "pt"
@@ -128,8 +128,8 @@ use DevToolbelt\Enums\Brazil\BrazilianState;
 $state = BrazilianState::SP;
 
 echo $state->value;    // "SP"
-echo $state->fullName(); // "São Paulo"
-echo $state->fullName(toUppercase: true); // "SÃO PAULO"
+echo $state->label(); // "São Paulo"
+echo $state->label(toUppercase: true); // "SÃO PAULO"
 
 // Get all states as array
 $states = BrazilianState::toArray(); // ['AC' => 'AC', 'AL' => 'AL', ...]
@@ -143,7 +143,7 @@ use DevToolbelt\Enums\Brazil\BrazilianDocumentType;
 
 $doc = BrazilianDocumentType::CPF;
 
-echo $doc->fullName(); // "Cadastro de Pessoa Física"
+echo $doc->label(); // "Cadastro de Pessoa Física"
 echo $doc->mask();     // "###.###.###-##"
 echo $doc->length();   // 11
 
@@ -161,7 +161,7 @@ use DevToolbelt\Enums\Brazil\BrazilianBankCode;
 $bank = BrazilianBankCode::NUBANK;
 
 echo $bank->value;      // "260"
-echo $bank->fullName(); // "Nu Pagamentos S.A. (Nubank)"
+echo $bank->label(); // "Nu Pagamentos S.A. (Nubank)"
 echo $bank->shortName(); // "Nubank"
 echo $bank->ispb();     // "18236120"
 ```
@@ -173,7 +173,7 @@ use DevToolbelt\Enums\Calendar\Month;
 use DevToolbelt\Enums\Calendar\DayOfWeek;
 
 $month = Month::FEBRUARY;
-echo $month->fullName();      // "February"
+echo $month->label();      // "February"
 echo $month->fullNamePtBr();  // "Fevereiro"
 echo $month->shortName();     // "Feb"
 echo $month->daysCount(2024); // 29 (leap year)
@@ -182,7 +182,7 @@ $month->next();               // Month::MARCH
 $month->previous();           // Month::JANUARY
 
 $day = DayOfWeek::SATURDAY;
-echo $day->fullName();     // "Saturday"
+echo $day->label();     // "Saturday"
 echo $day->fullNamePtBr(); // "Sábado"
 $day->isWeekend();         // true
 $day->isWeekday();         // false
@@ -200,13 +200,13 @@ use DevToolbelt\Enums\Personal\Gender;
 use DevToolbelt\Enums\Personal\ContactType;
 
 $gender = Gender::FEMALE;
-echo $gender->fullName();     // "Female"
+echo $gender->label();     // "Female"
 echo $gender->fullNamePtBr(); // "Feminino"
 echo $gender->pronoun();      // "she/her"
 echo $gender->pronounPtBr();  // "ela/dela"
 
 $contact = ContactType::WHATSAPP;
-echo $contact->fullName();  // "WhatsApp"
+echo $contact->label();  // "WhatsApp"
 echo $contact->icon();      // "whatsapp"
 echo $contact->baseUrl();   // "https://wa.me/"
 echo $contact->buildUrl('+5511999998888'); // "https://wa.me/5511999998888"

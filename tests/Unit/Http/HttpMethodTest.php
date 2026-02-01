@@ -82,6 +82,28 @@ final class HttpMethodTest extends TestCase
         $this->assertEquals('POST', $array['POST']);
     }
 
+    public function testToArrayWithLabelsReturnsAllMethodsWithLabels(): void
+    {
+        $array = HttpMethod::toArrayWithLabels();
+
+        $this->assertCount(9, $array);
+        $this->assertEquals('GET - Retrieve a resource', $array['GET']);
+        $this->assertEquals('POST - Create a new resource', $array['POST']);
+    }
+
+    public function testFullNameReturnsDescriptiveNames(): void
+    {
+        $this->assertEquals('GET - Retrieve a resource', HttpMethod::GET->label());
+        $this->assertEquals('POST - Create a new resource', HttpMethod::POST->label());
+        $this->assertEquals('PUT - Update/Replace a resource', HttpMethod::PUT->label());
+        $this->assertEquals('PATCH - Partial update a resource', HttpMethod::PATCH->label());
+        $this->assertEquals('DELETE - Remove a resource', HttpMethod::DELETE->label());
+        $this->assertEquals('HEAD - Retrieve headers only', HttpMethod::HEAD->label());
+        $this->assertEquals('OPTIONS - Describe communication options', HttpMethod::OPTIONS->label());
+        $this->assertEquals('CONNECT - Establish a tunnel', HttpMethod::CONNECT->label());
+        $this->assertEquals('TRACE - Perform a message loop-back test', HttpMethod::TRACE->label());
+    }
+
     public function testCanBeCreatedFromString(): void
     {
         $method = HttpMethod::from('POST');

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace DevToolbelt\Enums\Personal;
 
-enum ContactType: string
+use DevToolbelt\Enums\EnumInterface;
+
+enum ContactType: string implements EnumInterface
 {
     case EMAIL = 'email';
     case PHONE = 'phone';
@@ -23,7 +25,7 @@ enum ContactType: string
     case GITHUB = 'github';
     case ADDRESS = 'address';
 
-    public function fullName(): string
+    public function label(): string
     {
         return match ($this) {
             self::EMAIL => 'Email',
@@ -152,6 +154,14 @@ enum ContactType: string
     }
 
     /**
+     * @return string[]
+     */
+    public function labelList(): array
+    {
+        return array_map(fn (self $case) => $case->label(), self::cases());
+    }
+
+    /**
      * @return array<string, string>
      */
     public static function toArray(): array
@@ -159,7 +169,21 @@ enum ContactType: string
         $result = [];
 
         foreach (self::cases() as $type) {
-            $result[$type->value] = $type->fullName();
+            $result[$type->value] = $type->value;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function toArrayWithLabels(): array
+    {
+        $result = [];
+
+        foreach (self::cases() as $type) {
+            $result[$type->value] = $type->label();
         }
 
         return $result;

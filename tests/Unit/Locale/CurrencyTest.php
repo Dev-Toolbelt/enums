@@ -21,12 +21,12 @@ final class CurrencyTest extends TestCase
 
     public function testFullNameReturnsCorrectNames(): void
     {
-        $this->assertEquals('Brazilian Real', Currency::BRL->fullName());
-        $this->assertEquals('United States Dollar', Currency::USD->fullName());
-        $this->assertEquals('Euro', Currency::EUR->fullName());
-        $this->assertEquals('British Pound', Currency::GBP->fullName());
-        $this->assertEquals('Japanese Yen', Currency::JPY->fullName());
-        $this->assertEquals('Swiss Franc', Currency::CHF->fullName());
+        $this->assertEquals('Brazilian Real', Currency::BRL->label());
+        $this->assertEquals('United States Dollar', Currency::USD->label());
+        $this->assertEquals('Euro', Currency::EUR->label());
+        $this->assertEquals('British Pound', Currency::GBP->label());
+        $this->assertEquals('Japanese Yen', Currency::JPY->label());
+        $this->assertEquals('Swiss Franc', Currency::CHF->label());
     }
 
     public function testSymbolReturnsCorrectSymbols(): void
@@ -69,7 +69,7 @@ final class CurrencyTest extends TestCase
 
     public function testToArrayWithFullNamesReturnsCurrencyNames(): void
     {
-        $array = Currency::toArrayWithFullNames();
+        $array = Currency::toArrayWithLabels();
 
         $this->assertArrayHasKey('BRL', $array);
         $this->assertEquals('Brazilian Real', $array['BRL']);
@@ -94,7 +94,7 @@ final class CurrencyTest extends TestCase
         $currency = Currency::from('BRL');
 
         $this->assertEquals(Currency::BRL, $currency);
-        $this->assertEquals('Brazilian Real', $currency->fullName());
+        $this->assertEquals('Brazilian Real', $currency->label());
     }
 
     public function testTryFromReturnsNullForInvalidCurrency(): void
@@ -106,10 +106,10 @@ final class CurrencyTest extends TestCase
 
     public function testLatinAmericanCurrenciesExist(): void
     {
-        $this->assertEquals('Argentine Peso', Currency::ARS->fullName());
-        $this->assertEquals('Chilean Peso', Currency::CLP->fullName());
-        $this->assertEquals('Colombian Peso', Currency::COP->fullName());
-        $this->assertEquals('Mexican Peso', Currency::MXN->fullName());
-        $this->assertEquals('Peruvian Sol', Currency::PEN->fullName());
+        $this->assertEquals('Argentine Peso', Currency::ARS->label());
+        $this->assertEquals('Chilean Peso', Currency::CLP->label());
+        $this->assertEquals('Colombian Peso', Currency::COP->label());
+        $this->assertEquals('Mexican Peso', Currency::MXN->label());
+        $this->assertEquals('Peruvian Sol', Currency::PEN->label());
     }
 }

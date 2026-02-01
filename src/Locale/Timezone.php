@@ -6,6 +6,7 @@ namespace DevToolbelt\Enums\Locale;
 
 use DateTimeZone;
 use DateTimeImmutable;
+use DevToolbelt\Enums\EnumInterface;
 
 /**
  * Enum representing all PHP supported timezones.
@@ -13,7 +14,7 @@ use DateTimeImmutable;
  * This enum provides type-safe timezone configuration for JWT timestamp generation.
  * The default timezone is UTC. Includes legacy/alias timezones for backward compatibility.
  */
-enum Timezone: string
+enum Timezone: string implements EnumInterface
 {
     case AFRICA_ABIDJAN = "Africa/Abidjan";
     case AFRICA_ACCRA = "Africa/Accra";
@@ -642,5 +643,46 @@ enum Timezone: string
         $sign = $offset >= 0 ? "+" : "-";
 
         return sprintf("%s%02d:%02d", $sign, $hours, $minutes);
+    }
+
+    public function label(): string
+    {
+        return $this->value . ' (' . $this->getUtcOffsetString() . ')';
+    }
+
+    /**
+     * @return string[]
+     */
+    public function labelList(): array
+    {
+        return array_map(fn (self $case) => $case->label(), self::cases());
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function toArray(): array
+    {
+        $result = [];
+
+        foreach (self::cases() as $timezone) {
+            $result[$timezone->value] = $timezone->value;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function toArrayWithLabels(): array
+    {
+        $result = [];
+
+        foreach (self::cases() as $timezone) {
+            $result[$timezone->value] = $timezone->label();
+        }
+
+        return $result;
     }
 }

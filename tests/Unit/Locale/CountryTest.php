@@ -22,13 +22,13 @@ final class CountryTest extends TestCase
 
     public function testFullNameReturnsCorrectNames(): void
     {
-        $this->assertEquals('Brazil', Country::BR->fullName());
-        $this->assertEquals('United States', Country::US->fullName());
-        $this->assertEquals('United Kingdom', Country::GB->fullName());
-        $this->assertEquals('Germany', Country::DE->fullName());
-        $this->assertEquals('France', Country::FR->fullName());
-        $this->assertEquals('Japan', Country::JP->fullName());
-        $this->assertEquals('Portugal', Country::PT->fullName());
+        $this->assertEquals('Brazil', Country::BR->label());
+        $this->assertEquals('United States', Country::US->label());
+        $this->assertEquals('United Kingdom', Country::GB->label());
+        $this->assertEquals('Germany', Country::DE->label());
+        $this->assertEquals('France', Country::FR->label());
+        $this->assertEquals('Japan', Country::JP->label());
+        $this->assertEquals('Portugal', Country::PT->label());
     }
 
     public function testAlpha3ReturnsCorrectCodes(): void
@@ -54,7 +54,7 @@ final class CountryTest extends TestCase
 
     public function testToArrayWithFullNamesReturnsCountryNames(): void
     {
-        $array = Country::toArrayWithFullNames();
+        $array = Country::toArrayWithLabels();
 
         $this->assertArrayHasKey('BR', $array);
         $this->assertEquals('Brazil', $array['BR']);
@@ -69,7 +69,7 @@ final class CountryTest extends TestCase
         $country = Country::from('BR');
 
         $this->assertEquals(Country::BR, $country);
-        $this->assertEquals('Brazil', $country->fullName());
+        $this->assertEquals('Brazil', $country->label());
     }
 
     public function testTryFromReturnsNullForInvalidCountry(): void
@@ -81,20 +81,20 @@ final class CountryTest extends TestCase
 
     public function testSouthAmericanCountriesExist(): void
     {
-        $this->assertEquals('Argentina', Country::AR->fullName());
-        $this->assertEquals('Chile', Country::CL->fullName());
-        $this->assertEquals('Colombia', Country::CO->fullName());
-        $this->assertEquals('Peru', Country::PE->fullName());
-        $this->assertEquals('Uruguay', Country::UY->fullName());
-        $this->assertEquals('Venezuela', Country::VE->fullName());
+        $this->assertEquals('Argentina', Country::AR->label());
+        $this->assertEquals('Chile', Country::CL->label());
+        $this->assertEquals('Colombia', Country::CO->label());
+        $this->assertEquals('Peru', Country::PE->label());
+        $this->assertEquals('Uruguay', Country::UY->label());
+        $this->assertEquals('Venezuela', Country::VE->label());
     }
 
     public function testEuropeanCountriesExist(): void
     {
-        $this->assertEquals('Spain', Country::ES->fullName());
-        $this->assertEquals('Italy', Country::IT->fullName());
-        $this->assertEquals('Netherlands', Country::NL->fullName());
-        $this->assertEquals('Belgium', Country::BE->fullName());
-        $this->assertEquals('Switzerland', Country::CH->fullName());
+        $this->assertEquals('Spain', Country::ES->label());
+        $this->assertEquals('Italy', Country::IT->label());
+        $this->assertEquals('Netherlands', Country::NL->label());
+        $this->assertEquals('Belgium', Country::BE->label());
+        $this->assertEquals('Switzerland', Country::CH->label());
     }
 }

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace DevToolbelt\Enums\Calendar;
 
-enum Month: int
+use DevToolbelt\Enums\EnumInterface;
+
+enum Month: int implements EnumInterface
 {
     case JANUARY = 1;
     case FEBRUARY = 2;
@@ -19,7 +21,7 @@ enum Month: int
     case NOVEMBER = 11;
     case DECEMBER = 12;
 
-    public function fullName(): string
+    public function label(): string
     {
         return match ($this) {
             self::JANUARY => 'January',
@@ -165,14 +167,36 @@ enum Month: int
     }
 
     /**
-     * @return array<int, string>
+     * @return string[]
+     */
+    public function labelList(): array
+    {
+        return array_map(fn (self $case) => $case->label(), self::cases());
+    }
+
+    /**
+     * @return array<int, int>
      */
     public static function toArray(): array
     {
         $result = [];
 
         foreach (self::cases() as $month) {
-            $result[$month->value] = $month->fullName();
+            $result[$month->value] = $month->value;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    public static function toArrayWithLabels(): array
+    {
+        $result = [];
+
+        foreach (self::cases() as $month) {
+            $result[$month->value] = $month->label();
         }
 
         return $result;

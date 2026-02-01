@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace DevToolbelt\Enums\Http;
 
-enum HttpStatusCode: int
+use DevToolbelt\Enums\EnumInterface;
+
+enum HttpStatusCode: int implements EnumInterface
 {
     // 1xx Informational
     case CONTINUE = 100;
@@ -144,6 +146,47 @@ enum HttpStatusCode: int
             self::NOT_EXTENDED => 'Not Extended',
             self::NETWORK_AUTHENTICATION_REQUIRED => 'Network Authentication Required',
         };
+    }
+
+    public function label(): string
+    {
+        return $this->value . ' ' . $this->reasonPhrase();
+    }
+
+    /**
+     * @return string[]
+     */
+    public function labelList(): array
+    {
+        return array_map(fn (self $case) => $case->label(), self::cases());
+    }
+
+    /**
+     * @return array<int, int>
+     */
+    public static function toArray(): array
+    {
+        $result = [];
+
+        foreach (self::cases() as $status) {
+            $result[$status->value] = $status->value;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    public static function toArrayWithLabels(): array
+    {
+        $result = [];
+
+        foreach (self::cases() as $status) {
+            $result[$status->value] = $status->label();
+        }
+
+        return $result;
     }
 
     public function isInformational(): bool

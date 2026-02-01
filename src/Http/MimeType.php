@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace DevToolbelt\Enums\Http;
 
-enum MimeType: string
+use DevToolbelt\Enums\EnumInterface;
+
+enum MimeType: string implements EnumInterface
 {
     // Application
     case APPLICATION_JSON = 'application/json';
@@ -170,5 +172,101 @@ enum MimeType: string
             self::FONT_OTF => ['otf'],
             default => [],
         };
+    }
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::APPLICATION_JSON => 'JSON',
+            self::APPLICATION_XML => 'XML',
+            self::APPLICATION_PDF => 'PDF Document',
+            self::APPLICATION_ZIP => 'ZIP Archive',
+            self::APPLICATION_GZIP => 'GZIP Archive',
+            self::APPLICATION_OCTET_STREAM => 'Binary Data',
+            self::APPLICATION_FORM_URLENCODED => 'URL Encoded Form',
+            self::APPLICATION_JAVASCRIPT => 'JavaScript',
+            self::APPLICATION_LD_JSON => 'JSON-LD',
+            self::APPLICATION_MSWORD => 'Microsoft Word',
+            self::APPLICATION_DOCX => 'Microsoft Word (DOCX)',
+            self::APPLICATION_XLS => 'Microsoft Excel',
+            self::APPLICATION_XLSX => 'Microsoft Excel (XLSX)',
+            self::APPLICATION_PPT => 'Microsoft PowerPoint',
+            self::APPLICATION_PPTX => 'Microsoft PowerPoint (PPTX)',
+            self::APPLICATION_RAR => 'RAR Archive',
+            self::APPLICATION_7Z => '7-Zip Archive',
+            self::APPLICATION_TAR => 'TAR Archive',
+            self::TEXT_PLAIN => 'Plain Text',
+            self::TEXT_HTML => 'HTML',
+            self::TEXT_CSS => 'CSS',
+            self::TEXT_CSV => 'CSV',
+            self::TEXT_JAVASCRIPT => 'JavaScript',
+            self::TEXT_XML => 'XML',
+            self::TEXT_MARKDOWN => 'Markdown',
+            self::TEXT_CALENDAR => 'iCalendar',
+            self::IMAGE_PNG => 'PNG Image',
+            self::IMAGE_JPEG => 'JPEG Image',
+            self::IMAGE_GIF => 'GIF Image',
+            self::IMAGE_WEBP => 'WebP Image',
+            self::IMAGE_SVG => 'SVG Image',
+            self::IMAGE_ICO => 'ICO Icon',
+            self::IMAGE_BMP => 'BMP Image',
+            self::IMAGE_TIFF => 'TIFF Image',
+            self::IMAGE_AVIF => 'AVIF Image',
+            self::AUDIO_MPEG => 'MP3 Audio',
+            self::AUDIO_WAV => 'WAV Audio',
+            self::AUDIO_OGG => 'OGG Audio',
+            self::AUDIO_WEBM => 'WebM Audio',
+            self::AUDIO_AAC => 'AAC Audio',
+            self::AUDIO_FLAC => 'FLAC Audio',
+            self::AUDIO_MIDI => 'MIDI Audio',
+            self::VIDEO_MP4 => 'MP4 Video',
+            self::VIDEO_WEBM => 'WebM Video',
+            self::VIDEO_OGG => 'OGG Video',
+            self::VIDEO_AVI => 'AVI Video',
+            self::VIDEO_MPEG => 'MPEG Video',
+            self::VIDEO_QUICKTIME => 'QuickTime Video',
+            self::FONT_WOFF => 'WOFF Font',
+            self::FONT_WOFF2 => 'WOFF2 Font',
+            self::FONT_TTF => 'TrueType Font',
+            self::FONT_OTF => 'OpenType Font',
+            self::MULTIPART_FORM_DATA => 'Multipart Form Data',
+            self::MULTIPART_BYTERANGES => 'Multipart Byte Ranges',
+        };
+    }
+
+    /**
+     * @return string[]
+     */
+    public function labelList(): array
+    {
+        return array_map(fn (self $case) => $case->label(), self::cases());
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function toArray(): array
+    {
+        $result = [];
+
+        foreach (self::cases() as $mimeType) {
+            $result[$mimeType->value] = $mimeType->value;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function toArrayWithLabels(): array
+    {
+        $result = [];
+
+        foreach (self::cases() as $mimeType) {
+            $result[$mimeType->value] = $mimeType->label();
+        }
+
+        return $result;
     }
 }

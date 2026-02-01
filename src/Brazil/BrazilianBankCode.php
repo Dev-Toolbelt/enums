@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace DevToolbelt\Enums\Brazil;
 
-enum BrazilianBankCode: string
+use DevToolbelt\Enums\EnumInterface;
+
+enum BrazilianBankCode: string implements EnumInterface
 {
     case BANCO_DO_BRASIL = '001';
     case BANCO_CENTRAL = '002';
@@ -222,7 +224,7 @@ enum BrazilianBankCode: string
     case SCOTIABANK_BRASIL = '751';
     case BANCO_BANCOOB = '756';
 
-    public function fullName(): string
+    public function label(): string
     {
         return match ($this) {
             self::BANCO_DO_BRASIL => 'Banco do Brasil S.A.',
@@ -337,6 +339,14 @@ enum BrazilianBankCode: string
     }
 
     /**
+     * @return string[]
+     */
+    public function labelList(): array
+    {
+        return array_map(fn (self $case) => $case->label(), self::cases());
+    }
+
+    /**
      * @return array<string, string>
      */
     public static function toArray(): array
@@ -353,12 +363,12 @@ enum BrazilianBankCode: string
     /**
      * @return array<string, string>
      */
-    public static function toArrayWithFullNames(): array
+    public static function toArrayWithLabels(): array
     {
         $result = [];
 
         foreach (self::cases() as $bank) {
-            $result[$bank->value] = $bank->fullName();
+            $result[$bank->value] = $bank->label();
         }
 
         return $result;

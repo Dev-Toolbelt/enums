@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace DevToolbelt\Enums\Locale;
 
-enum Country: string
+use DevToolbelt\Enums\EnumInterface;
+
+enum Country: string implements EnumInterface
 {
     case AF = 'AF';
     case AL = 'AL';
@@ -203,7 +205,7 @@ enum Country: string
     case ZM = 'ZM';
     case ZW = 'ZW';
 
-    public function fullName(): string
+    public function label(): string
     {
         return match ($this) {
             self::AF => 'Afghanistan',
@@ -608,6 +610,14 @@ enum Country: string
     }
 
     /**
+     * @return string[]
+     */
+    public function labelList(): array
+    {
+        return array_map(fn (self $case) => $case->label(), self::cases());
+    }
+
+    /**
      * @return array<string, string>
      */
     public static function toArray(): array
@@ -624,12 +634,12 @@ enum Country: string
     /**
      * @return array<string, string>
      */
-    public static function toArrayWithFullNames(): array
+    public static function toArrayWithLabels(): array
     {
         $result = [];
 
         foreach (self::cases() as $country) {
-            $result[$country->value] = $country->fullName();
+            $result[$country->value] = $country->label();
         }
 
         return $result;

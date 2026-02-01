@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace DevToolbelt\Enums\Personal;
 
-enum Gender: string
+use DevToolbelt\Enums\EnumInterface;
+
+enum Gender: string implements EnumInterface
 {
     case MALE = 'M';
     case FEMALE = 'F';
@@ -12,7 +14,7 @@ enum Gender: string
     case OTHER = 'O';
     case PREFER_NOT_TO_SAY = 'N';
 
-    public function fullName(): string
+    public function label(): string
     {
         return match ($this) {
             self::MALE => 'Male',
@@ -86,6 +88,14 @@ enum Gender: string
     }
 
     /**
+     * @return string[]
+     */
+    public function labelList(): array
+    {
+        return array_map(fn (self $case) => $case->label(), self::cases());
+    }
+
+    /**
      * @return array<string, string>
      */
     public static function toArray(): array
@@ -93,7 +103,21 @@ enum Gender: string
         $result = [];
 
         foreach (self::cases() as $gender) {
-            $result[$gender->value] = $gender->fullName();
+            $result[$gender->value] = $gender->value;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function toArrayWithLabels(): array
+    {
+        $result = [];
+
+        foreach (self::cases() as $gender) {
+            $result[$gender->value] = $gender->label();
         }
 
         return $result;

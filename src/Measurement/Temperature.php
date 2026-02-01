@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace DevToolbelt\Enums\Measurement;
 
-enum Temperature: string
+use DevToolbelt\Enums\EnumInterface;
+
+enum Temperature: string implements EnumInterface
 {
     case CELSIUS = 'C';
     case FAHRENHEIT = 'F';
@@ -12,7 +14,7 @@ enum Temperature: string
     case RANKINE = 'R';
     case REAUMUR = 'Re';
 
-    public function fullName(): string
+    public function label(): string
     {
         return match ($this) {
             self::CELSIUS => 'Celsius',
@@ -132,6 +134,14 @@ enum Temperature: string
     }
 
     /**
+     * @return string[]
+     */
+    public function labelList(): array
+    {
+        return array_map(fn (self $case) => $case->label(), self::cases());
+    }
+
+    /**
      * @return array<string, string>
      */
     public static function toArray(): array
@@ -139,7 +149,21 @@ enum Temperature: string
         $result = [];
 
         foreach (self::cases() as $temperature) {
-            $result[$temperature->value] = $temperature->fullName();
+            $result[$temperature->value] = $temperature->value;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function toArrayWithLabels(): array
+    {
+        $result = [];
+
+        foreach (self::cases() as $temperature) {
+            $result[$temperature->value] = $temperature->label();
         }
 
         return $result;
