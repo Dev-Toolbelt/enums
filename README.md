@@ -1,9 +1,11 @@
 # Dev-Toolbelt Enums
 
-[![PHP Version](https://img.shields.io/badge/php-%3E%3D8.1-8892BF.svg)](https://php.net/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%206-brightgreen.svg)](https://phpstan.org/)
-[![Tests](https://img.shields.io/badge/tests-247%20passed-success.svg)](tests/)
+[![CI](https://github.com/dev-toolbelt/enums/actions/workflows/ci.yml/badge.svg)](https://github.com/dev-toolbelt/enums/actions/workflows/ci.yml)
+[![Coverage](https://codecov.io/gh/dev-toolbelt/enums/branch/main/graph/badge.svg)](https://codecov.io/gh/dev-toolbelt/enums)
+[![Latest Stable Version](https://poser.pugx.org/dev-toolbelt/enums/v/stable)](https://packagist.org/packages/dev-toolbelt/enums)
+[![Total Downloads](https://poser.pugx.org/dev-toolbelt/enums/downloads)](https://packagist.org/packages/dev-toolbelt/enums)
+[![License](https://poser.pugx.org/dev-toolbelt/enums/license)](https://packagist.org/packages/dev-toolbelt/enums)
+[![PHP Version](https://img.shields.io/packagist/php-v/dev-toolbelt/enums)](https://packagist.org/packages/dev-toolbelt/enums)
 
 A comprehensive PHP library providing **type-safe enum classes** for commonly used domains. Stop reinventing the wheel - use battle-tested, well-documented enums across all your PHP projects.
 
@@ -372,13 +374,34 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 
 Please make sure to update tests as appropriate and follow PSR-12 coding standards.
 
-## Security
+### Code Quality Requirements
 
-If you discover any security-related issues, please email dersonsena@gmail.com instead of using the issue tracker.
+| Check | Tool | Requirement |
+|-------|------|-------------|
+| Tests | PHPUnit | All tests must pass |
+| Coverage | PCOV | Minimum **85%** coverage |
+| Code Style | PHP CodeSniffer | PSR-12 compliant |
+| Static Analysis | PHPStan | Level 6, no errors |
+
+### Pull Request Guidelines
+
+Before submitting a PR, ensure:
+
+1. **All tests pass:** `composer test`
+2. **Coverage is at least 85%:** `composer test:coverage`
+3. **Code style is correct:** `composer phpcs`
+4. **No static analysis errors:** `composer phpstan`
+
+> **Important:** Pull requests with coverage below 85% will be automatically blocked by CI.
+
+### Coverage Report
+
+- **Dashboard:** [Codecov](https://codecov.io/gh/dev-toolbelt/enums)
+- **HTML Report:** [GitHub Pages](https://dev-toolbelt.github.io/enums/)
 
 ## License
 
-This library is open-sourced software licensed under the [MIT license](LICENSE).
+MIT License. See [LICENSE](LICENSE) for details.
 
 ## Credits
 
