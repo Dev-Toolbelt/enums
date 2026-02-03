@@ -52,6 +52,17 @@ final class BrazilianBankCodeTest extends TestCase
         $this->assertEquals('18236120', BrazilianBankCode::NUBANK->ispb());
     }
 
+    public function testIspbReturnsCorrectCodesForAdditionalBanks(): void
+    {
+        $this->assertEquals('00416968', BrazilianBankCode::BANCO_INTER->ispb());
+        $this->assertEquals('31872495', BrazilianBankCode::C6_BANK->ispb());
+        $this->assertEquals('08561701', BrazilianBankCode::PAGSEGURO->ispb());
+        $this->assertEquals('10573521', BrazilianBankCode::MERCADO_PAGO->ispb());
+        $this->assertEquals('22896431', BrazilianBankCode::PICPAY->ispb());
+        $this->assertEquals('01181521', BrazilianBankCode::SICREDI->ispb());
+        $this->assertEquals('02038232', BrazilianBankCode::SICOOB->ispb());
+    }
+
     public function testDigitalBanksExist(): void
     {
         $this->assertEquals('260', BrazilianBankCode::NUBANK->value);

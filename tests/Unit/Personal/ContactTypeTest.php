@@ -74,6 +74,11 @@ final class ContactTypeTest extends TestCase
         $this->assertEquals('https://github.com/johndoe', ContactType::GITHUB->buildUrl('johndoe'));
     }
 
+    public function testBuildUrlReturnsRawValueWhenNoBaseUrlExists(): void
+    {
+        $this->assertEquals('123 Main St', ContactType::ADDRESS->buildUrl('123 Main St'));
+    }
+
     public function testIsPhoneReturnsTrueForPhoneTypes(): void
     {
         $this->assertTrue(ContactType::PHONE->isPhone());

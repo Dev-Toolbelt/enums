@@ -42,6 +42,18 @@ final class CountryTest extends TestCase
         $this->assertEquals('PRT', Country::PT->alpha3());
     }
 
+    public function testAlpha3ReturnsCorrectCodesForAdditionalCountries(): void
+    {
+        $this->assertEquals('URY', Country::UY->alpha3());
+        $this->assertEquals('UZB', Country::UZ->alpha3());
+        $this->assertEquals('VUT', Country::VU->alpha3());
+        $this->assertEquals('VAT', Country::VA->alpha3());
+        $this->assertEquals('VEN', Country::VE->alpha3());
+        $this->assertEquals('VNM', Country::VN->alpha3());
+        $this->assertEquals('YEM', Country::YE->alpha3());
+        $this->assertEquals('ZMB', Country::ZM->alpha3());
+    }
+
     public function testToArrayReturnsAllCountries(): void
     {
         $array = Country::toArray();

@@ -137,6 +137,19 @@ final class MimeTypeTest extends TestCase
         $this->assertEquals(['mp3'], MimeType::AUDIO_MPEG->extensions());
     }
 
+    public function testExtensionsReturnsCorrectExtensionsForVideoAndFontTypes(): void
+    {
+        $this->assertEquals(['webm'], MimeType::VIDEO_WEBM->extensions());
+        $this->assertEquals(['ogv'], MimeType::VIDEO_OGG->extensions());
+        $this->assertEquals(['avi'], MimeType::VIDEO_AVI->extensions());
+        $this->assertEquals(['mpeg', 'mpg'], MimeType::VIDEO_MPEG->extensions());
+        $this->assertEquals(['mov', 'qt'], MimeType::VIDEO_QUICKTIME->extensions());
+        $this->assertEquals(['woff'], MimeType::FONT_WOFF->extensions());
+        $this->assertEquals(['woff2'], MimeType::FONT_WOFF2->extensions());
+        $this->assertEquals(['ttf'], MimeType::FONT_TTF->extensions());
+        $this->assertEquals(['otf'], MimeType::FONT_OTF->extensions());
+    }
+
     public function testCanBeCreatedFromString(): void
     {
         $mimeType = MimeType::from('application/json');
