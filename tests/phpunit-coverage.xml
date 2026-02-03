@@ -51,6 +51,8 @@
 
     <php>
         <env name="XDEBUG_MODE" value="coverage"/>
+        <ini name="pcov.enabled" value="1"/>
+        <ini name="pcov.directory" value="../src"/>
         <ini name="memory_limit" value="512M"/>
         <ini name="error_reporting" value="-1"/>
     </php>
